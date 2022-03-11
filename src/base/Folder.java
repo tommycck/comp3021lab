@@ -1,8 +1,10 @@
 package base;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Folder {
+public class Folder implements Comparable<Folder>{
 	
 	private ArrayList<Note> notes;
 	private String name;
@@ -61,4 +63,84 @@ public class Folder {
 		}
 		return name + ":" + nText + ":" + nImage;
 	}
+
+	// compare name
+	@Override
+	public int compareTo(Folder o) {
+		// TODO Auto-generated method stub
+		return this.name.compareTo(o.name);
+	}
+	
+	public void sortNotes() {
+		// List<Note> notes = new ArrayList<Note>();
+		Collections.sort(notes);
+	}
+	
+	public List<Note> searchNotes(String keywords) {
+		List<Note> targetNotes = new ArrayList<Note>();
+		ArrayList<String> searchKeyWords = new ArrayList<String>();
+		String temp = keywords.toUpperCase();
+		int keywordLen = temp.length();
+		
+		while (keywordLen != 0)
+		{
+			int findSpaceIndex = temp.indexOf(" ");
+			if (findSpaceIndex != -1)
+			{
+				if (!temp.substring(0,findSpaceIndex).equals("OR"))
+					searchKeyWords.add(temp.substring(0,findSpaceIndex));
+				temp = temp.substring(findSpaceIndex+1,keywordLen);
+				keywordLen = keywordLen - findSpaceIndex - 1;
+			}
+			else
+			{
+				searchKeyWords.add(temp.substring(0,keywordLen));
+				keywordLen = 0;
+			}
+		}
+		
+		for (Note n : notes)
+		{
+			if(n instanceof TextNote){
+				//check title
+				boolean target = false;
+				String tempTitle = n.getTitle().toUpperCase();
+				if (tempTitle.contains(searchKeyWords.get(0)) || tempTitle.contains(searchKeyWords.get(1)))
+				{
+					if (tempTitle.contains(searchKeyWords.get(2)) || tempTitle.contains(searchKeyWords.get(3)))
+					{
+						target = true;
+						targetNotes.add(n);
+					}
+				}
+				
+				// check content
+				if (!target)
+				{
+					String tempContent = ((TextNote) n).getContent().toUpperCase();
+					if (tempContent.contains(searchKeyWords.get(0)) || tempContent.contains(searchKeyWords.get(1)))
+					{
+						if (tempContent.contains(searchKeyWords.get(2)) || tempContent.contains(searchKeyWords.get(3)))
+						{
+							target = true;
+							targetNotes.add(n);
+						}
+					}
+				}
+			}
+			else
+			{
+				String tempTitle = n.getTitle().toUpperCase();
+				if (tempTitle.contains(searchKeyWords.get(0)) || tempTitle.contains(searchKeyWords.get(1)))
+				{
+					if (tempTitle.contains(searchKeyWords.get(2)) || tempTitle.contains(searchKeyWords.get(3)))
+					{
+						targetNotes.add(n);
+					}
+				}
+			}
+		}
+		return targetNotes;
+	}
+	
 }
