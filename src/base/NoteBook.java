@@ -54,6 +54,7 @@ public class NoteBook {
 		return true;
 	}
 	
+	// lab03
 	public void sortFolders() {
 		Collections.sort(folders);
 		for (Folder f : folders) {

@@ -64,6 +64,7 @@ public class Folder implements Comparable<Folder>{
 		return name + ":" + nText + ":" + nImage;
 	}
 
+	// lab03
 	// compare name
 	@Override
 	public int compareTo(Folder o) {

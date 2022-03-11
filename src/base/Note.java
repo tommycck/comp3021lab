@@ -44,9 +44,6 @@ public class Note implements Comparable<Note>{
 	
 	// Note --> compare creation date
 	// more recently --> smaller
-	// return 1 = this > o
-	// return -1 = this < o
-	// return 0 = this = o
 	@Override
 	public int compareTo(Note o) {
 		// TODO Auto-generated method stub
