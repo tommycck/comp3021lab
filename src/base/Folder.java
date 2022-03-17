@@ -1,10 +1,11 @@
 package base;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Folder implements Comparable<Folder>{
+public class Folder implements Comparable<Folder>, Serializable{
 	
 	private ArrayList<Note> notes;
 	private String name;
@@ -64,8 +65,6 @@ public class Folder implements Comparable<Folder>{
 		return name + ":" + nText + ":" + nImage;
 	}
 
-	// lab03
-	// compare name
 	@Override
 	public int compareTo(Folder o) {
 		// TODO Auto-generated method stub

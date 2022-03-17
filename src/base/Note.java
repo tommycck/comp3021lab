@@ -1,8 +1,9 @@
 package base;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Note implements Comparable<Note>{
+public class Note implements Comparable<Note>, Serializable{
 	private Date date;
 	private String title;
 	
@@ -13,6 +14,10 @@ public class Note implements Comparable<Note>{
 	
 	public String getTitle() {
 		return title;
+	}
+	
+	public String toString() {
+		return date.toString() + "\t" + title;
 	}
 
 	@Override
@@ -35,11 +40,6 @@ public class Note implements Comparable<Note>{
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
-	}
-	
-	// lab 03
-	public String toString() {
-		return date.toString() + "\t" + title;
 	}
 	
 	// Note --> compare creation date
