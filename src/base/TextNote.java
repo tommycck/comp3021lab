@@ -58,6 +58,7 @@ public class TextNote extends Note {
 			fw = new FileWriter(file);
 			BufferedWriter bw = new BufferedWriter(fw);
 			bw.write(this.getContent());
+			bw.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
