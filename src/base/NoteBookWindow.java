@@ -239,7 +239,7 @@ public class NoteBookWindow extends Application {
 						list.add(n.getTitle());
 					}
 				}
-				// currentSearch not empty
+				// currentSearch not empty --> fix
 				else
 				{
 					for (Note n : f.searchNotes(currentSearch))
