@@ -89,6 +89,8 @@ public class Folder implements Comparable<Folder>, Serializable{
 			{
 				if (!temp.substring(0,findSpaceIndex).equals("OR"))
 					searchKeyWords.add(temp.substring(0,findSpaceIndex));
+				else
+					searchKeyWords.add("OR");
 				temp = temp.substring(findSpaceIndex+1,keywordLen);
 				keywordLen = keywordLen - findSpaceIndex - 1;
 			}
@@ -98,45 +100,112 @@ public class Folder implements Comparable<Folder>, Serializable{
 				keywordLen = 0;
 			}
 		}
-		
+
 		for (Note n : notes)
 		{
 			if(n instanceof TextNote){
 				//check title
 				boolean target = false;
 				String tempTitle = n.getTitle().toUpperCase();
-				if (tempTitle.contains(searchKeyWords.get(0)) || tempTitle.contains(searchKeyWords.get(1)))
+				int searchKeyWordsSize = searchKeyWords.size();
+				for (int i = 0; i < searchKeyWordsSize; i++)
 				{
-					if (tempTitle.contains(searchKeyWords.get(2)) || tempTitle.contains(searchKeyWords.get(3)))
+					if (i + 1 == searchKeyWordsSize)
 					{
-						target = true;
-						targetNotes.add(n);
+						if (tempTitle.contains(searchKeyWords.get(i)))
+						{
+							target = true;
+							targetNotes.add(n);
+						}
 					}
+					else if (i + 2 != searchKeyWordsSize)
+					{
+						if (searchKeyWords.get(i+1).equals("OR"))
+						{
+							if (tempTitle.contains(searchKeyWords.get(i)) || tempTitle.contains(searchKeyWords.get(i+2)))
+							{
+								if (i + 3 == searchKeyWordsSize)
+								{
+									target = true;
+									targetNotes.add(n);
+								}
+								i = i + 2;
+
+							}
+						}
+					}
+					else
+						break;
+
 				}
 				
 				// check content
 				if (!target)
 				{
 					String tempContent = ((TextNote) n).getContent().toUpperCase();
-					if (tempContent.contains(searchKeyWords.get(0)) || tempContent.contains(searchKeyWords.get(1)))
+					for (int i = 0; i < searchKeyWordsSize; i++)
 					{
-						if (tempContent.contains(searchKeyWords.get(2)) || tempContent.contains(searchKeyWords.get(3)))
+						if (i + 1 == searchKeyWordsSize)
 						{
-							target = true;
-							targetNotes.add(n);
+							if (tempContent.contains(searchKeyWords.get(i)))
+							{
+								target = true;
+								targetNotes.add(n);
+							}
 						}
+						else if (i + 2 != searchKeyWordsSize)
+						{
+							if (searchKeyWords.get(i+1).equals("OR"))
+							{
+								if (tempContent.contains(searchKeyWords.get(i)) || tempContent.contains(searchKeyWords.get(i+2)))
+								{
+									if (i + 3 == searchKeyWordsSize)
+									{
+										target = true;
+										targetNotes.add(n);
+									}
+									i = i + 2;
+
+								}
+							}
+						}
+						else
+							break;
+
 					}
 				}
 			}
 			else
 			{
 				String tempTitle = n.getTitle().toUpperCase();
-				if (tempTitle.contains(searchKeyWords.get(0)) || tempTitle.contains(searchKeyWords.get(1)))
+				int searchKeyWordsSize = searchKeyWords.size();
+				for (int i = 0; i < searchKeyWordsSize; i++)
 				{
-					if (tempTitle.contains(searchKeyWords.get(2)) || tempTitle.contains(searchKeyWords.get(3)))
+					if (i + 1 == searchKeyWordsSize)
 					{
-						targetNotes.add(n);
+						if (tempTitle.contains(searchKeyWords.get(i)))
+						{
+							targetNotes.add(n);
+						}
 					}
+					else if (i + 2 != searchKeyWordsSize)
+					{
+						if (searchKeyWords.get(i+1).equals("OR"))
+						{
+							if (tempTitle.contains(searchKeyWords.get(i)) || tempTitle.contains(searchKeyWords.get(i+2)))
+							{
+								if (i + 3 == searchKeyWordsSize)
+								{
+									targetNotes.add(n);
+								}
+								i = i + 2;
+
+							}
+						}
+					}
+					else
+						break;
+
 				}
 			}
 		}
