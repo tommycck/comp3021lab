@@ -443,7 +443,7 @@ public class NoteBookWindow extends Application {
 		buttonSaveNote.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	if (currentFolder.equals("") || currentNote.equals("") || currentFolder.equals("-----"))
+            	if (currentFolder.equals("") || currentFolder.equals("-----"))
             	{
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Warning");
@@ -485,7 +485,7 @@ public class NoteBookWindow extends Application {
 		buttonDeleteNote.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-            	if (currentFolder.equals("") || currentNote.equals("") || currentFolder.equals("-----"))
+            	if (currentFolder.equals("") || currentFolder.equals("-----"))
             	{
 					Alert alert = new Alert(AlertType.WARNING);
 					alert.setTitle("Warning");
