@@ -134,7 +134,6 @@ public class NoteBookWindow extends Application {
 				if (file != null)
 				{
 					loadNoteBook(file);
-					updateListView();
 				}
 				
 			}
@@ -552,7 +551,16 @@ public class NoteBookWindow extends Application {
 	}
 
 	private void loadNoteBook(File file) {
+		
 		NoteBook nb = new NoteBook(file.getAbsolutePath());
+		foldersComboBox.getItems().clear();
+		List<Folder> folders = nb.getFolders();
+		for(int i = 0; i<nb.getFolders().size(); i++) {
+			foldersComboBox.getItems().addAll(folders.get(i).getName());
+		}
+		foldersComboBox.setValue("-----");
+		updateListView();
 		noteBook = nb;
+		
 	}
 }
