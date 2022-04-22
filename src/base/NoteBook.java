@@ -109,4 +109,9 @@ public class NoteBook implements Serializable{
 		}
 		return true;
 	}
+
+	public void addFolder(String folderName) {
+		// TODO Auto-generated method stub
+		folders.add(new Folder(folderName));
+	}
 }
