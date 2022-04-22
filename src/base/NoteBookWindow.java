@@ -245,6 +245,7 @@ public class NoteBookWindow extends Application {
 				if (t1 == null)
 					return;
 				String title = t1.toString();
+				currentNote = title;
 				// This is the selected title
 				// TODO load the content of the selected note in
 				// textAreNote
@@ -463,10 +464,14 @@ public class NoteBookWindow extends Application {
             		// found the folder
             		if (folder.getName().equals(currentFolder))
             		{
-            			for (Note note : folder.getNotes()) {
-							if (note.getTitle().equals(currentNote) && note instanceof TextNote) 
+            			// System.out.println("found the folder");
+            			for (Note note : folder.getNotes()) 
+            			{
+            				System.out.println(currentNote + "    " + note.getTitle());
+							if (note.getTitle().equals(currentNote)) 
 							{
 								((TextNote) note).setContent(content);
+								// System.out.println("Save note success");
 							}
 						}
             		}
